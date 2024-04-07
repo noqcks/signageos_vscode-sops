@@ -117,7 +117,7 @@ function getSupportedFileFormat(languageId: string, fileName: string): IFileForm
 	for (var pattern in associations) {
 		const associationFileFormat = associations[pattern];
 		debug('getSupportedFileFormat association', pattern, associationFileFormat);
-		if (minimatch(path.basename(fileName), pattern) && associationFileFormat === languageId) {
+		if (minimatch.match([path.basename(fileName)], pattern).length > 0 && associationFileFormat === languageId) {
 			return 'plaintext'; // When the file association is changed, use original file format as plaintext
 		}
 	}
